@@ -1,0 +1,35 @@
+       Console.Write("Enter Y coordinate for a point: ");
+            double y = Convert.ToDouble(Console.ReadLine());
+            return new Point(x, y);
+        }
+
+        public void CheckPointInCircles(Point testPoint, Circle[] circles)
+        {
+            for (int i = 0; i < circles.Length; i++)
+            {
+                bool isInside = circles[i].IsPointInside(testPoint);
+                Console.WriteLine($"The test point is {(isInside ? "inside" : "outside")} Circle {i + 1}");
+            }
+        }
+    }
+        static void Main()
+        {
+            CircleManager manager = new CircleManager();
+
+            Console.Write("How many circles do you want to create? ");
+            int numberOfCircles = Convert.ToInt32(Console.ReadLine());
+
+            Circle[] circles = manager.CreateCircles(numberOfCircles);
+
+            Console.WriteLine("Here are the details of the circles:");
+            for (int i = 0; i < numberOfCircles; i++)
+            {
+                Console.WriteLine($"Circle {i + 1} - ");
+                manager.PrintCircleInfo(circles[i]);
+            }
+
+            Point testPoint = manager.GetPointFromUser();
+            manager.CheckPointInCircles(testPoint, circles);
+        }
+    }
+}
